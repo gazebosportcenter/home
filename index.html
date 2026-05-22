@@ -216,15 +216,15 @@
 </head>
 <body class="w-full">
 
-  <!-- Navigation Bar (Optimized Desktop Layout) -->
+  <!-- Navigation Bar (Optimized Desktop & Adaptive Mobile Layout) -->
   <nav class="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent py-5" id="main-nav">
-    <div class="max-w-7xl mx-auto px-8 flex items-center justify-between relative">
+    <div class="max-w-7xl mx-auto px-6 md:px-8 flex items-center justify-between relative">
       
-      <!-- Left side symmetry placeholder -->
-      <div class="flex-1"></div>
+      <!-- Left side symmetry placeholder on desktop, Mobile Hamburger on left if needed -->
+      <div class="flex-1 hidden md:block"></div>
 
       <!-- Center Aligned Desktop Navigation Pill Capsule -->
-      <div class="flex gap-8 text-sm items-center justify-center mx-auto px-10 py-3 rounded-full glass border border-ui-border shadow-lg" id="desktop-menu">
+      <div class="hidden md:flex gap-8 text-sm items-center justify-center mx-auto px-10 py-3 rounded-full glass border border-ui-border shadow-lg" id="desktop-menu">
         <a href="#about" class="nav-link hover:text-brand-primary transition-colors py-1 font-semibold tracking-wide">Tentang</a> 
         <a href="#facilities" class="nav-link hover:text-brand-primary transition-colors py-1 font-semibold tracking-wide">Fasilitas</a> 
         <a href="#gym" class="nav-link hover:text-brand-primary transition-colors py-1 font-semibold tracking-wide">Gym &amp; Fitness</a> 
@@ -234,8 +234,8 @@
         <a href="#testimonials" class="nav-link hover:text-brand-primary transition-colors py-1 font-semibold tracking-wide">Testimoni</a>
       </div>
 
-      <!-- Right Aligned Desktop Controls -->
-      <div class="flex-1 flex items-center justify-end gap-4">
+      <!-- Right Aligned Desktop Controls & Adaptive Mobile Header Block -->
+      <div class="flex-1 flex items-center justify-end gap-3 md:gap-4">
         <!-- Theme Toggle Button -->
         <button id="theme-toggle-btn" class="p-2.5 rounded-full glass hover:scale-105 transition-all text-ui-txt flex items-center justify-center shadow-md" aria-label="Toggle Theme">
           <!-- Sun Icon -->
@@ -250,37 +250,66 @@
         </button>
 
         <!-- Dynamic Upcoming Prayer & Countdown Widget (Without icons) -->
-        <div id="prayer-header-widget" class="flex items-center justify-center px-5 py-2.5 rounded-full glass border border-ui-border text-xs min-w-[180px] text-gray-200 shadow-md">
-          <span class="w-2 h-2 rounded-full bg-brand-primary animate-pulse mr-2.5"></span>
+        <div id="prayer-header-widget" class="flex items-center justify-center px-4 md:px-5 py-2 md:py-2.5 rounded-full glass border border-ui-border text-xs min-w-[130px] md:min-w-[180px] text-gray-200 shadow-md">
+          <span class="w-2 h-2 rounded-full bg-brand-primary animate-pulse mr-2 md:mr-2.5"></span>
           <div id="prayer-display-container" class="transition-all duration-300 opacity-100 font-bold tracking-wider">
             Mencari Jadwal...
           </div>
         </div>
+
+        <!-- Mobile Menu Hamburger Trigger -->
+        <button id="mobile-menu-toggle" class="md:hidden p-2.5 rounded-full glass text-ui-txt flex items-center justify-center shadow-md hover:text-brand-primary" aria-label="Buka Menu">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
       </div>
     </div>
   </nav>
+
+  <!-- Mobile Navigation Slide-Out Drawer -->
+  <div id="mobile-nav-drawer" class="fixed inset-y-0 right-0 z-50 w-80 max-w-[85vw] bg-ui-bg glass border-l border-ui-border p-8 flex flex-col gap-6 translate-x-full transition-transform duration-300 ease-in-out md:hidden shadow-2xl">
+    <div class="flex items-center justify-between pb-6 border-b border-ui-border">
+      <span class="font-bold text-lg text-brand-primary tracking-wider">GSC MENU</span>
+      <button id="mobile-menu-close" class="p-2 rounded-full hover:bg-white/10 text-ui-txt transition">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+    </div>
+    <div class="flex flex-col gap-5 text-base font-semibold text-ui-txt">
+      <a href="#about" class="hover:text-brand-primary py-2 border-b border-ui-border/30 transition">Tentang Kami</a>
+      <a href="#facilities" class="hover:text-brand-primary py-2 border-b border-ui-border/30 transition">Fasilitas</a>
+      <a href="#gym" class="hover:text-brand-primary py-2 border-b border-ui-border/30 transition">Gym &amp; Fitness</a>
+      <a href="#minisoccer" class="hover:text-brand-primary py-2 border-b border-ui-border/30 transition">Mini Soccer</a>
+      <a href="#kuliner" class="hover:text-brand-primary py-2 border-b border-ui-border/30 transition">Kuliner &amp; UMKM</a>
+      <a href="#gallery" class="hover:text-brand-primary py-2 border-b border-ui-border/30 transition">Galeri Foto</a>
+      <a href="#testimonials" class="hover:text-brand-primary py-2 border-b border-ui-border/30 transition">Testimoni</a>
+    </div>
+    <div class="mt-auto pt-6 border-t border-ui-border">
+      <button onclick="openBookingModal(); document.getElementById('mobile-menu-close').click();" class="w-full py-3 rounded-full font-bold bg-brand-primary text-black transition hover:bg-emerald-400 text-center shadow-lg shadow-brand-primary/20">
+        Booking Lapangan
+      </button>
+    </div>
+  </div>
 
   <!-- Hero Section -->
   <section class="relative w-full h-screen flex items-center justify-center overflow-hidden">
     <img class="absolute inset-0 w-full h-full object-cover transform scale-105" src="https://images.pexels.com/photos/18968457/pexels-photo-18968457.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1920" alt="Arsitektur Gazebo Sport Center modern di malam hari">
     <div class="hero-overlay absolute inset-0"></div>
-    <div class="relative z-10 flex flex-col justify-center items-center text-center max-w-4xl mx-auto px-8 pt-20">
+    <div class="relative z-10 flex flex-col justify-center items-center text-center max-w-4xl mx-auto px-6 md:px-8 pt-20">
       
       <span class="bg-brand-primary/20 text-[#19ff80] border border-brand-primary/30 px-5 py-2 rounded-full text-xs md:text-sm font-bold mb-8 uppercase tracking-widest shadow-sm">
         Family, Sport &amp; Culinary Lifestyle Center
       </span>
-      <h1 class="text-5xl md:text-6xl font-extrabold leading-tight text-white mb-6 tracking-tight">
+      <h1 class="text-4xl md:text-6xl font-extrabold leading-tight text-white mb-6 tracking-tight">
         Satu Tempat untuk Olahraga, <span class="text-[#19ff80]">Kuliner &amp; Edukasi</span> Keluarga
       </h1>
-      <p class="text-lg text-gray-300 max-w-2xl mb-10 leading-relaxed font-medium">
+      <p class="text-base md:text-lg text-gray-300 max-w-2xl mb-10 leading-relaxed font-medium">
         Gazebo Sport Center menghadirkan pengalaman lengkap mulai dari gym, playground, mini soccer, basketball, kuliner, hingga ruang belajar dalam satu kawasan modern.
       </p>
       
-      <div class="flex gap-5 mb-12">
-        <button onclick="openBookingModal()" class="px-9 py-4 rounded-full font-bold bg-brand-primary hover:bg-emerald-400 text-black transition-all duration-300 hover:-translate-y-0.5 shadow-lg shadow-brand-primary/20">
+      <div class="flex flex-col sm:flex-row gap-4 sm:gap-5 mb-12 w-full sm:w-auto">
+        <button onclick="openBookingModal()" class="w-full sm:w-auto px-9 py-4 rounded-full font-bold bg-brand-primary hover:bg-emerald-400 text-black transition-all duration-300 hover:-translate-y-0.5 shadow-lg shadow-brand-primary/20 text-center">
           Kunjungi &amp; Reservasi
         </button> 
-        <a href="#facilities" class="px-9 py-4 rounded-full font-bold border border-white/30 hover:border-white hover:bg-white/5 text-white transition-all duration-300 hover:-translate-y-0.5 text-center">
+        <a href="#facilities" class="w-full sm:w-auto px-9 py-4 rounded-full font-bold border border-white/30 hover:border-white hover:bg-white/5 text-white transition-all duration-300 hover:-translate-y-0.5 text-center">
           Lihat Fasilitas
         </a>
       </div>
@@ -307,173 +336,173 @@
   </section>
 
   <!-- About Section -->
-  <section id="about" class="py-32 px-8 relative overflow-hidden">
+  <section id="about" class="py-24 md:py-32 px-6 md:px-8 relative overflow-hidden">
     <div class="absolute -top-40 -left-40 w-96 h-96 bg-brand-primary/10 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center fade-in">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center fade-in">
       <div>
         <div class="flex items-center gap-3 mb-5">
           <span class="w-10 h-0.5 bg-brand-primary inline-block"></span>
           <span class="text-brand-primary font-bold uppercase tracking-widest text-sm">PROFIL KAWASAN</span>
         </div>
-        <h2 class="text-4xl font-extrabold text-ui-txt leading-tight">Tentang Gazebo Sport Center (GSC)</h2>
-        <p class="mt-6 text-ui-txtSec leading-relaxed text-base font-medium">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-ui-txt leading-tight">Tentang Gazebo Sport Center (GSC)</h2>
+        <p class="mt-6 text-ui-txtSec leading-relaxed text-sm md:text-base font-medium">
           Gazebo Sport Center adalah pusat aktivitas keluarga dan komunitas modern yang menggabungkan olahraga, kuliner, edukasi, dan ruang sosial dalam satu kawasan terintegrasi. Kami hadir untuk menunjang gaya hidup sehat sekaligus memfasilitasi kebersamaan keluarga di wilayah Anda.
         </p>
-        <div class="grid grid-cols-2 gap-5 mt-12">
-          <div class="glass rounded-2xl p-6 text-center hover:border-brand-primary/50 transition duration-300 shadow-md">
-            <p class="text-4xl font-extrabold text-brand-primary">9+</p>
+        <div class="grid grid-cols-2 gap-4 md:gap-5 mt-10 md:mt-12">
+          <div class="glass rounded-2xl p-5 md:p-6 text-center hover:border-brand-primary/50 transition duration-300 shadow-md">
+            <p class="text-3xl md:text-4xl font-extrabold text-brand-primary">9+</p>
             <p class="text-xs text-ui-txtSec mt-2 uppercase tracking-wider font-bold">Fasilitas Terpadu</p>
           </div>
-          <div class="glass rounded-2xl p-6 text-center hover:border-brand-secondary/50 transition duration-300 shadow-md">
-            <p class="text-4xl font-extrabold text-brand-secondary">100%</p>
+          <div class="glass rounded-2xl p-5 md:p-6 text-center hover:border-brand-secondary/50 transition duration-300 shadow-md">
+            <p class="text-3xl md:text-4xl font-extrabold text-brand-secondary">100%</p>
             <p class="text-xs text-ui-txtSec mt-2 uppercase tracking-wider font-bold">Family Friendly</p>
           </div>
-          <div class="glass rounded-2xl p-6 text-center hover:border-brand-primary/50 transition duration-300 shadow-md">
-            <p class="text-2xl font-extrabold text-brand-primary">Sport</p>
+          <div class="glass rounded-2xl p-5 md:p-6 text-center hover:border-brand-primary/50 transition duration-300 shadow-md">
+            <p class="text-xl md:text-2xl font-extrabold text-brand-primary">Sport</p>
             <p class="text-xs text-ui-txtSec mt-2 uppercase tracking-wider font-bold">Lifestyle Center</p>
           </div>
-          <div class="glass rounded-2xl p-6 text-center hover:border-brand-secondary/50 transition duration-300 shadow-md">
-            <p class="text-2xl font-extrabold text-brand-secondary">UMKM</p>
+          <div class="glass rounded-2xl p-5 md:p-6 text-center hover:border-brand-secondary/50 transition duration-300 shadow-md">
+            <p class="text-xl md:text-2xl font-extrabold text-brand-secondary">UMKM</p>
             <p class="text-xs text-ui-txtSec mt-2 uppercase tracking-wider font-bold">Collaboration</p>
           </div>
         </div>
       </div>
       <div class="relative group">
         <div class="absolute -inset-2 bg-gradient-to-r from-brand-primary to-brand-secondary rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-700"></div>
-        <img class="relative rounded-3xl w-full h-[450px] object-cover shadow-2xl transition duration-500 group-hover:scale-[1.01]" src="https://images.pexels.com/photos/4241353/pexels-photo-4241353.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Keluarga bahagia bersantai di lapangan GSC">
+        <img class="relative rounded-3xl w-full h-[320px] md:h-[450px] object-cover shadow-2xl transition duration-500 group-hover:scale-[1.01]" loading="lazy" src="https://images.pexels.com/photos/33212390/pexels-photo-33212390.jpeg" alt="Suasana Kawasan GSC">
       </div>
     </div>
   </section>
 
   <!-- Facilities Section -->
-  <section id="facilities" class="py-32 px-8 bg-ui-bgSec relative border-y border-ui-border">
+  <section id="facilities" class="py-24 md:py-32 px-6 md:px-8 bg-ui-bgSec relative border-y border-ui-border">
     <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-20">
+      <div class="text-center mb-16 md:text-center">
         <span class="text-brand-primary font-bold uppercase tracking-widest text-sm">EKSPLORASI KAWASAN</span>
-        <h2 class="text-4xl md:text-5xl font-extrabold mt-3 tracking-tight">Fasilitas Unggulan</h2>
-        <p class="text-ui-txtSec mt-4 max-w-xl mx-auto text-base font-medium">Semua yang keluarga Anda butuhkan dalam satu kawasan modern yang nyaman dan terpadu.</p>
+        <h2 class="text-3xl md:text-5xl font-extrabold mt-3 tracking-tight">Fasilitas Unggulan</h2>
+        <p class="text-ui-txtSec mt-4 max-w-xl mx-auto text-sm md:text-base font-medium">Semua yang keluarga Anda butuhkan dalam satu kawasan modern yang nyaman dan terpadu.</p>
         
         <!-- Category Filters -->
-        <div class="flex justify-center gap-4 mt-10" id="facility-filters">
-          <button onclick="filterFacilities('all')" class="filter-btn px-7 py-2.5 rounded-full text-sm font-bold transition-all bg-brand-primary text-black shadow-md">Semua</button>
-          <button onclick="filterFacilities('olahraga')" class="filter-btn px-7 py-2.5 rounded-full text-sm font-bold transition-all border border-ui-border text-ui-txtSec hover:border-brand-primary">Olahraga</button>
-          <button onclick="filterFacilities('kuliner')" class="filter-btn px-7 py-2.5 rounded-full text-sm font-bold transition-all border border-ui-border text-ui-txtSec hover:border-brand-primary">Kuliner</button>
-          <button onclick="filterFacilities('komunitas')" class="filter-btn px-7 py-2.5 rounded-full text-sm font-bold transition-all border border-ui-border text-ui-txtSec hover:border-brand-primary">Komunitas &amp; Edukasi</button>
+        <div class="flex flex-wrap justify-center gap-3 md:gap-4 mt-8 md:mt-10" id="facility-filters">
+          <button onclick="filterFacilities('all')" class="filter-btn px-6 md:px-7 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-bold transition-all bg-brand-primary text-black shadow-md">Semua</button>
+          <button onclick="filterFacilities('olahraga')" class="filter-btn px-6 md:px-7 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-bold transition-all border border-ui-border text-ui-txtSec hover:border-brand-primary">Olahraga</button>
+          <button onclick="filterFacilities('kuliner')" class="filter-btn px-6 md:px-7 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-bold transition-all border border-ui-border text-ui-txtSec hover:border-brand-primary">Kuliner</button>
+          <button onclick="filterFacilities('komunitas')" class="filter-btn px-6 md:px-7 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-bold transition-all border border-ui-border text-ui-txtSec hover:border-brand-primary">Komunitas &amp; Edukasi</button>
         </div>
       </div>
 
-      <!-- Cards Grid (Optimized Desktop Grid) -->
-      <div class="grid grid-cols-3 gap-8 mt-16" id="facility-grid">
+      <!-- Cards Grid (Optimized Desktop & Tablet Grid) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-12 md:mt-16" id="facility-grid">
         <!-- Fac 1 -->
-        <div data-category="kuliner" class="facility-item glass facility-card rounded-2xl p-8 shadow-sm">
-          <div class="w-14 h-14 rounded-2xl bg-brand-primary/10 flex items-center justify-center mb-6 border border-brand-primary/20">
-            <i data-lucide="soup" class="text-brand-primary w-7 h-7"></i>
+        <div data-category="kuliner" class="facility-item glass facility-card rounded-2xl p-6 md:p-8 shadow-sm">
+          <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-brand-primary/10 flex items-center justify-center mb-6 border border-brand-primary/20">
+            <i data-lucide="soup" class="text-brand-primary w-6 h-6 md:w-7 md:h-7"></i>
           </div>
-          <h3 class="font-bold text-2xl text-ui-txt">Soto &amp; Pawon Ndeso</h3>
-          <p class="text-ui-txtSec text-sm mt-3 leading-relaxed font-medium">Kuliner tradisional dengan cita rasa autentik Jawa Barat dalam suasana modern nyaman.</p>
+          <h3 class="font-bold text-xl md:text-2xl text-ui-txt">Soto &amp; Pawon Ndeso</h3>
+          <p class="text-ui-txtSec text-xs md:text-sm mt-3 leading-relaxed font-medium">Kuliner tradisional dengan cita rasa autentik Jawa Barat dalam suasana modern nyaman.</p>
         </div>
         <!-- Fac 2 -->
-        <div data-category="kuliner" class="facility-item glass facility-card rounded-2xl p-8 shadow-sm">
-          <div class="w-14 h-14 rounded-2xl bg-brand-secondary/10 flex items-center justify-center mb-6 border border-brand-secondary/20">
-            <i data-lucide="store" class="text-brand-secondary w-7 h-7"></i>
+        <div data-category="kuliner" class="facility-item glass facility-card rounded-2xl p-6 md:p-8 shadow-sm">
+          <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-brand-secondary/10 flex items-center justify-center mb-6 border border-brand-secondary/20">
+            <i data-lucide="store" class="text-brand-secondary w-6 h-6 md:w-7 md:h-7"></i>
           </div>
-          <h3 class="font-bold text-2xl text-ui-txt">Tenant UMKM</h3>
-          <p class="text-ui-txtSec text-sm mt-3 leading-relaxed font-medium">Ruang kolaborasi untuk pelaku usaha kuliner dan kerajinan lokal berkembang bersama.</p>
+          <h3 class="font-bold text-xl md:text-2xl text-ui-txt">Tenant UMKM</h3>
+          <p class="text-ui-txtSec text-xs md:text-sm mt-3 leading-relaxed font-medium">Ruang kolaborasi untuk pelaku usaha kuliner dan kerajinan lokal berkembang bersama.</p>
         </div>
         <!-- Fac 3 -->
-        <div data-category="komunitas" class="facility-item glass facility-card rounded-2xl p-8 shadow-sm">
-          <div class="w-14 h-14 rounded-2xl bg-brand-primary/10 flex items-center justify-center mb-6 border border-brand-primary/20">
-            <i data-lucide="presentation" class="text-brand-primary w-7 h-7"></i>
+        <div data-category="komunitas" class="facility-item glass facility-card rounded-2xl p-6 md:p-8 shadow-sm">
+          <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-brand-primary/10 flex items-center justify-center mb-6 border border-brand-primary/20">
+            <i data-lucide="presentation" class="text-brand-primary w-6 h-6 md:w-7 md:h-7"></i>
           </div>
-          <h3 class="font-bold text-2xl text-ui-txt">Ruang Meeting</h3>
-          <p class="text-ui-txtSec text-sm mt-3 leading-relaxed font-medium">Ruang meeting privat dilengkapi fasilitas proyektor dan high-speed Wi-Fi untuk para profesional.</p>
+          <h3 class="font-bold text-xl md:text-2xl text-ui-txt">Ruang Meeting</h3>
+          <p class="text-ui-txtSec text-xs md:text-sm mt-3 leading-relaxed font-medium">Ruang meeting privat dilengkapi fasilitas proyektor dan high-speed Wi-Fi untuk para profesional.</p>
         </div>
         <!-- Fac 4 -->
-        <div data-category="komunitas" class="facility-item glass facility-card rounded-2xl p-8 shadow-sm">
-          <div class="w-14 h-14 rounded-2xl bg-brand-secondary/10 flex items-center justify-center mb-6 border border-brand-secondary/20">
-            <i data-lucide="heart" class="text-brand-secondary w-7 h-7"></i>
+        <div data-category="komunitas" class="facility-item glass facility-card rounded-2xl p-6 md:p-8 shadow-sm">
+          <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-brand-secondary/10 flex items-center justify-center mb-6 border border-brand-secondary/20">
+            <i data-lucide="heart" class="text-brand-secondary w-6 h-6 md:w-7 md:h-7"></i>
           </div>
-          <h3 class="font-bold text-2xl text-ui-txt">Mushola Cozy</h3>
-          <p class="text-ui-txtSec text-sm mt-3 leading-relaxed font-medium">Tempat ibadah yang bersih, tenang, sejuk, dan nyaman bagi seluruh pengunjung kawasan GSC.</p>
+          <h3 class="font-bold text-xl md:text-2xl text-ui-txt">Mushola Cozy</h3>
+          <p class="text-ui-txtSec text-xs md:text-sm mt-3 leading-relaxed font-medium">Tempat ibadah yang bersih, tenang, sejuk, dan nyaman bagi seluruh pengunjung kawasan GSC.</p>
         </div>
         <!-- Fac 5 -->
-        <div data-category="komunitas" class="facility-item glass facility-card rounded-2xl p-8 shadow-sm">
-          <div class="w-14 h-14 rounded-2xl bg-brand-primary/10 flex items-center justify-center mb-6 border border-brand-primary/20">
-            <i data-lucide="book-open" class="text-brand-primary w-7 h-7"></i>
+        <div data-category="komunitas" class="facility-item glass facility-card rounded-2xl p-6 md:p-8 shadow-sm">
+          <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-brand-primary/10 flex items-center justify-center mb-6 border border-brand-primary/20">
+            <i data-lucide="book-open" class="text-brand-primary w-6 h-6 md:w-7 md:h-7"></i>
           </div>
-          <h3 class="font-bold text-2xl text-ui-txt">Ruang Belajar &amp; Taman Baca</h3>
-          <p class="text-ui-txtSec text-sm mt-3 leading-relaxed font-medium">Area belajar kondusif dengan koleksi buku anak dan literatur umum yang lengkap.</p>
+          <h3 class="font-bold text-xl md:text-2xl text-ui-txt">Ruang Belajar &amp; Taman Baca</h3>
+          <p class="text-ui-txtSec text-xs md:text-sm mt-3 leading-relaxed font-medium">Area belajar kondusif dengan koleksi buku anak dan literatur umum yang lengkap.</p>
         </div>
         <!-- Fac 6 -->
-        <div data-category="olahraga" class="facility-item glass facility-card rounded-2xl p-8 shadow-sm">
-          <div class="w-14 h-14 rounded-2xl bg-brand-secondary/10 flex items-center justify-center mb-6 border border-brand-secondary/20">
-            <i data-lucide="dumbbell" class="text-brand-secondary w-7 h-7"></i>
+        <div data-category="olahraga" class="facility-item glass facility-card rounded-2xl p-6 md:p-8 shadow-sm">
+          <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-brand-secondary/10 flex items-center justify-center mb-6 border border-brand-secondary/20">
+            <i data-lucide="dumbbell" class="text-brand-secondary w-6 h-6 md:w-7 md:h-7"></i>
           </div>
-          <h3 class="font-bold text-2xl text-ui-txt">Gym &amp; Fitness Center</h3>
-          <p class="text-ui-txtSec text-sm mt-3 leading-relaxed font-medium">Alat latihan beban premium, area kardio, dan bimbingan personal trainer bersertifikat.</p>
+          <h3 class="font-bold text-xl md:text-2xl text-ui-txt">Gym &amp; Fitness Center</h3>
+          <p class="text-ui-txtSec text-xs md:text-sm mt-3 leading-relaxed font-medium">Alat latihan beban premium, area kardio, dan bimbingan personal trainer bersertifikat.</p>
         </div>
         <!-- Fac 7 -->
-        <div data-category="komunitas" class="facility-item glass facility-card rounded-2xl p-8 shadow-sm">
-          <div class="w-14 h-14 rounded-2xl bg-brand-primary/10 flex items-center justify-center mb-6 border border-brand-primary/20">
-            <i data-lucide="baby" class="text-brand-primary w-7 h-7"></i>
+        <div data-category="komunitas" class="facility-item glass facility-card rounded-2xl p-6 md:p-8 shadow-sm">
+          <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-brand-primary/10 flex items-center justify-center mb-6 border border-brand-primary/20">
+            <i data-lucide="baby" class="text-brand-primary w-6 h-6 md:w-7 md:h-7"></i>
           </div>
-          <h3 class="font-bold text-2xl text-ui-txt">Playground Anak</h3>
-          <p class="text-ui-txtSec text-sm mt-3 leading-relaxed font-medium">Area bermain anak indoor &amp; outdoor berstandar keamanan tinggi dengan aneka wahana edukatif.</p>
+          <h3 class="font-bold text-xl md:text-2xl text-ui-txt">Playground Anak</h3>
+          <p class="text-ui-txtSec text-xs md:text-sm mt-3 leading-relaxed font-medium">Area bermain anak indoor &amp; outdoor berstandar keamanan tinggi dengan aneka wahana edukatif.</p>
         </div>
         <!-- Fac 8 -->
-        <div data-category="olahraga" class="facility-item glass facility-card rounded-2xl p-8 shadow-sm">
-          <div class="w-14 h-14 rounded-2xl bg-brand-secondary/10 flex items-center justify-center mb-6 border border-brand-secondary/20">
-            <i data-lucide="goal" class="text-brand-secondary w-7 h-7"></i>
+        <div data-category="olahraga" class="facility-item glass facility-card rounded-2xl p-6 md:p-8 shadow-sm">
+          <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-brand-secondary/10 flex items-center justify-center mb-6 border border-brand-secondary/20">
+            <i data-lucide="goal" class="text-brand-secondary w-6 h-6 md:w-7 md:h-7"></i>
           </div>
-          <h3 class="font-bold text-2xl text-ui-txt">Mini Soccer Kids</h3>
-          <p class="text-ui-txtSec text-sm mt-3 leading-relaxed font-medium">Lapangan rumput sintetis premium khusus anak-anak untuk berlatih sepakbola dan futsal.</p>
+          <h3 class="font-bold text-xl md:text-2xl text-ui-txt">Mini Soccer Kids</h3>
+          <p class="text-ui-txtSec text-xs md:text-sm mt-3 leading-relaxed font-medium">Lapangan rumput sintetis premium khusus anak-anak untuk berlatih sepakbola dan futsal.</p>
         </div>
         <!-- Fac 9 -->
-        <div data-category="olahraga" class="facility-item glass facility-card rounded-2xl p-8 shadow-sm">
-          <div class="w-14 h-14 rounded-2xl bg-brand-primary/10 flex items-center justify-center mb-6 border border-brand-primary/20">
-            <i data-lucide="dribbble" class="text-brand-primary w-7 h-7"></i>
+        <div data-category="olahraga" class="facility-item glass facility-card rounded-2xl p-6 md:p-8 shadow-sm">
+          <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-brand-primary/10 flex items-center justify-center mb-6 border border-brand-primary/20">
+            <i data-lucide="dribbble" class="text-brand-primary w-6 h-6 md:w-7 md:h-7"></i>
           </div>
-          <h3 class="font-bold text-2xl text-ui-txt">Basketball Court 3X3</h3>
-          <p class="text-ui-txtSec text-sm mt-3 leading-relaxed font-medium">Lapangan basket standar kompetisi 3x3 dengan ring berkualitas tinggi dan pencahayaan terang.</p>
+          <h3 class="font-bold text-xl md:text-2xl text-ui-txt">Basketball Court 3X3</h3>
+          <p class="text-ui-txtSec text-xs md:text-sm mt-3 leading-relaxed font-medium">Lapangan basket standar kompetisi 3x3 dengan ring berkualitas tinggi dan pencahayaan terang.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Gym Section -->
-  <section id="gym" class="py-32 px-8 relative">
+  <section id="gym" class="py-24 md:py-32 px-6 md:px-8 relative">
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-secondary/5 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center fade-in">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center fade-in">
       <div class="relative group">
         <div class="absolute -inset-2 bg-gradient-to-r from-brand-secondary to-pink-600 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-700"></div>
-        <img class="relative rounded-3xl w-full h-[450px] object-cover shadow-2xl transition duration-500 group-hover:scale-[1.01]" src="https://images.pexels.com/photos/4753890/pexels-photo-4753890.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Ruang gym atmosfer gelap di Gazebo Sport Center">
+        <img class="relative rounded-3xl w-full h-[320px] md:h-[450px] object-cover shadow-2xl transition duration-500 group-hover:scale-[1.01]" loading="lazy" src="https://images.pexels.com/photos/4753890/pexels-photo-4753890.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Ruang gym atmosfer gelap di Gazebo Sport Center">
       </div>
       <div>
         <div class="flex items-center gap-3 mb-5">
           <span class="w-10 h-0.5 bg-brand-secondary inline-block"></span>
           <span class="text-brand-secondary font-bold uppercase tracking-widest text-sm">HEALTH &amp; FITNESS</span>
         </div>
-        <h2 class="text-4xl font-extrabold text-ui-txt">Upgrade Your Body &amp; Lifestyle</h2>
-        <p class="mt-4 text-ui-txtSec leading-relaxed text-base font-medium">Nikmati fasilitas kebugaran terbaik dengan dukungan alat latihan kardio dan beban yang modern, serta bimbingan instruktur profesional.</p>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-ui-txt">Upgrade Your Body &amp; Lifestyle</h2>
+        <p class="mt-4 text-ui-txtSec leading-relaxed text-sm md:text-base font-medium">Nikmati fasilitas kebugaran terbaik dengan dukungan alat latihan kardio dan beban yang modern, serta bimbingan instruktur profesional.</p>
         <ul class="mt-8 space-y-4">
           <li class="flex items-center gap-4">
-            <i data-lucide="check-circle" class="text-brand-primary w-6 h-6 flex-shrink-0"></i>
-            <span class="text-ui-txtSec font-medium">Alat fitness lengkap &amp; berstandar internasional</span>
+            <i data-lucide="check-circle" class="text-brand-primary w-5 h-5 md:w-6 md:h-6 flex-shrink-0"></i>
+            <span class="text-ui-txtSec text-sm md:text-base font-medium">Alat fitness lengkap &amp; berstandar internasional</span>
           </li>
           <li class="flex items-center gap-4">
-            <i data-lucide="check-circle" class="text-brand-primary w-6 h-6 flex-shrink-0"></i>
-            <span class="text-ui-txtSec font-medium">Personal trainer bersertifikat &amp; ramah</span>
+            <i data-lucide="check-circle" class="text-brand-primary w-5 h-5 md:w-6 md:h-6 flex-shrink-0"></i>
+            <span class="text-ui-txtSec text-sm md:text-base font-medium">Personal trainer bersertifikat &amp; ramah</span>
           </li>
           <li class="flex items-center gap-4">
-            <i data-lucide="check-circle" class="text-brand-primary w-6 h-6 flex-shrink-0"></i>
-            <span class="text-ui-txtSec font-medium">Sistem membership harian/bulanan yang terjangkau</span>
+            <i data-lucide="check-circle" class="text-brand-primary w-5 h-5 md:w-6 md:h-6 flex-shrink-0"></i>
+            <span class="text-ui-txtSec text-sm md:text-base font-medium">Sistem membership harian/bulanan yang terjangkau</span>
           </li>
           <li class="flex items-center gap-4">
-            <i data-lucide="check-circle" class="text-brand-primary w-6 h-6 flex-shrink-0"></i>
-            <span class="text-ui-txtSec font-medium">Kamar mandi &amp; shower yang bersih dan higienis</span>
+            <i data-lucide="check-circle" class="text-brand-primary w-5 h-5 md:w-6 md:h-6 flex-shrink-0"></i>
+            <span class="text-ui-txtSec text-sm md:text-base font-medium">Kamar mandi &amp; shower yang bersih dan higienis</span>
           </li>
         </ul>
-        <a href="https://gym.gazebosportcenter.com/" target="_blank" rel="noopener" class="inline-block mt-10 px-9 py-4 rounded-full font-bold bg-brand-secondary hover:bg-pink-600 text-white transition-all duration-300 hover:-translate-y-0.5 shadow-lg shadow-brand-secondary/20">
+        <a href="https://gym.gazebosportcenter.com/" target="_blank" rel="noopener" class="inline-block mt-8 md:mt-10 px-8 py-3.5 md:px-9 md:py-4 rounded-full font-bold bg-brand-secondary hover:bg-pink-600 text-white transition-all duration-300 hover:-translate-y-0.5 shadow-lg shadow-brand-secondary/20">
           Gabung Membership
         </a>
       </div>
@@ -481,16 +510,16 @@
   </section>
 
   <!-- Mini Soccer Section -->
-  <section id="minisoccer" class="py-28 px-6 bg-ui-bgSec relative border-y border-ui-border">
+  <section id="minisoccer" class="py-24 md:py-28 px-6 md:px-8 bg-ui-bgSec relative border-y border-ui-border">
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-primary/5 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center fade-in">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center fade-in">
       <div>
         <div class="flex items-center gap-2 mb-4">
           <span class="w-8 h-0.5 bg-brand-primary inline-block"></span>
           <span class="text-brand-primary font-bold uppercase tracking-widest text-sm">DEVELOPMENT &amp; SPORT</span>
         </div>
         <h2 class="text-3xl md:text-4xl font-extrabold text-ui-txt leading-tight">GSC Mini Soccer Kids</h2>
-        <p class="mt-6 text-ui-txtSec leading-relaxed">
+        <p class="mt-6 text-ui-txtSec leading-relaxed text-sm md:text-base font-medium">
           Kawasan mini soccer ramah anak yang dirancang khusus untuk anak-anak yang ingin mengembangkan bakat sepakbola mereka serta melatih motorik kasar dan fisik secara optimal di lingkungan yang aman, positif, dan seru.
         </p>
         <div class="mt-8 space-y-4">
@@ -500,7 +529,7 @@
             </div>
             <div>
               <h4 class="font-bold text-ui-txt">Melatih Motorik Kasar &amp; Fisik</h4>
-              <p class="text-sm text-ui-txtSec">Latihan dasar koordinasi langkah kaki, kelincahan, dan kekuatan tubuh sejak dini.</p>
+              <p class="text-sm text-ui-txtSec leading-relaxed">Latihan dasar koordinasi langkah kaki, kelincahan, dan kekuatan tubuh sejak dini.</p>
             </div>
           </div>
           <div class="flex items-start gap-3">
@@ -509,7 +538,7 @@
             </div>
             <div>
               <h4 class="font-bold text-ui-txt">Mengembangkan Bakat Anak</h4>
-              <p class="text-sm text-ui-txtSec">Fasilitas terstruktur yang menyenangkan untuk menyalurkan minat tinggi si kecil pada bidang sepakbola.</p>
+              <p class="text-sm text-ui-txtSec leading-relaxed">Fasilitas terstruktur yang menyenangkan untuk menyalurkan minat tinggi si kecil pada bidang sepakbola.</p>
             </div>
           </div>
         </div>
@@ -529,25 +558,25 @@
       </div>
       <div class="relative group">
         <div class="absolute -inset-1.5 bg-gradient-to-r from-brand-primary to-brand-secondary rounded-3xl blur opacity-30 group-hover:opacity-50 transition duration-1000"></div>
-        <img class="relative rounded-3xl w-full h-96 object-cover shadow-2xl transition duration-500" loading="lazy" src="https://images.pexels.com/photos/1142941/pexels-photo-1142941.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Lapangan Mini Soccer Hijau GSC">
+        <img class="relative rounded-3xl w-full h-[280px] md:h-96 object-cover shadow-2xl transition duration-500" loading="lazy" src="https://images.pexels.com/photos/1142941/pexels-photo-1142941.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Lapangan Mini Soccer Hijau GSC">
       </div>
     </div>
   </section>
 
   <!-- Kids Area -->
-  <section class="py-32 px-8 relative">
-    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center fade-in">
+  <section class="py-24 md:py-32 px-6 md:px-8 relative">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center fade-in">
       <div class="relative group">
         <div class="absolute -inset-2 bg-gradient-to-r from-brand-secondary to-brand-primary rounded-3xl blur opacity-25 transition duration-700"></div>
-        <img class="relative rounded-3xl w-full h-[450px] object-cover shadow-2xl" src="https://images.pexels.com/photos/19875334/pexels-photo-19875334.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Anak-anak bermain di playground GSC">
+        <img class="relative rounded-3xl w-full h-[320px] md:h-[450px] object-cover shadow-2xl" loading="lazy" src="https://images.pexels.com/photos/19875334/pexels-photo-19875334.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Anak-anak bermain di playground GSC">
       </div>
       <div>
         <div class="flex items-center gap-3 mb-5">
           <span class="w-10 h-0.5 bg-brand-primary inline-block"></span>
           <span class="text-brand-primary font-bold uppercase tracking-widest text-sm">FAMILY &amp; KIDS</span>
         </div>
-        <h2 class="text-4xl font-extrabold text-ui-txt">Fun &amp; Safe Kids Area</h2>
-        <p class="mt-6 text-ui-txtSec leading-relaxed text-base font-medium">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-ui-txt">Fun &amp; Safe Kids Area</h2>
+        <p class="mt-6 text-ui-txtSec leading-relaxed text-sm md:text-base font-medium">
           Area bermain ramah anak yang dirancang khusus dengan mengutamakan keamanan dan kebersihan tingkat tinggi. Playground indoor dan soft play yang mendukung proses stimulasi tumbuh kembang fisik yang ceria.
         </p>
         <div class="mt-8 flex gap-6">
@@ -561,7 +590,7 @@
           </div>
         </div>
         <div class="mt-10">
-          <a href="https://www.instagram.com/gsc.kidsplay/" target="_blank" rel="noopener" class="inline-flex items-center gap-2.5 px-9 py-4 rounded-full font-bold border border-brand-primary/40 hover:bg-brand-primary hover:text-black hover:border-brand-primary text-ui-txt transition duration-300 shadow-sm">
+          <a href="https://www.instagram.com/gsc.kidsplay/" target="_blank" rel="noopener" class="inline-flex items-center gap-2.5 px-8 py-3.5 md:px-9 md:py-4 rounded-full font-bold border border-brand-primary/40 hover:bg-brand-primary hover:text-black hover:border-brand-primary text-ui-txt transition duration-300 shadow-sm">
             <i data-lucide="rocket" class="w-5 h-5"></i> Lihat Fasilitas
           </a>
         </div>
@@ -570,19 +599,19 @@
   </section>
 
   <!-- Kuliner Section -->
-  <section id="kuliner" class="py-32 px-8 bg-ui-bgSec border-y border-ui-border">
-    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center fade-in">
-      <div class="grid grid-cols-2 gap-6">
-        <img class="rounded-2xl w-full h-60 object-cover shadow-lg hover:scale-105 transition duration-300" src="https://images.pexels.com/photos/37193502/pexels-photo-37193502.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Soto tradisional khas GSC"> 
-        <img class="rounded-2xl w-full h-60 object-cover shadow-lg hover:scale-105 transition duration-300" src="https://images.pexels.com/photos/3570077/pexels-photo-3570077.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Area kuliner luar ruangan GSC">
+  <section id="kuliner" class="py-24 md:py-32 px-6 md:px-8 bg-ui-bgSec border-y border-ui-border">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center fade-in">
+      <div class="grid grid-cols-2 gap-4 md:gap-6">
+        <img class="rounded-2xl w-full h-44 md:h-60 object-cover shadow-lg hover:scale-105 transition duration-300" loading="lazy" src="https://images.pexels.com/photos/37193502/pexels-photo-37193502.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Soto tradisional khas GSC"> 
+        <img class="rounded-2xl w-full h-44 md:h-60 object-cover shadow-lg hover:scale-105 transition duration-300" loading="lazy" src="https://images.pexels.com/photos/3570077/pexels-photo-3570077.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Area kuliner luar ruangan GSC">
       </div>
       <div>
         <div class="flex items-center gap-3 mb-5">
           <span class="w-10 h-0.5 bg-brand-secondary inline-block"></span>
           <span class="text-brand-secondary font-bold uppercase tracking-widest text-sm">CULINARY CORNER</span>
         </div>
-        <h2 class="text-4xl font-extrabold text-ui-txt">Kuliner &amp; UMKM</h2>
-        <p class="mt-6 text-ui-txtSec leading-relaxed text-base font-medium">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-ui-txt">Kuliner &amp; UMKM</h2>
+        <p class="mt-6 text-ui-txtSec leading-relaxed text-sm md:text-base font-medium">
           Nikmati kelezatan kuliner legendaris Indonesia dari Soto &amp; Pawon Ndeso serta beragam hidangan lokal dari para pelaku UMKM binaan kami. Sangat cocok dinikmati usai berolahraga maupun saat bersantai menghabiskan waktu luang bersama keluarga.
         </p>
         <span class="inline-flex items-center gap-2.5 mt-8 px-5 py-2.5 rounded-full text-xs font-bold bg-brand-secondary/10 text-brand-secondary border border-brand-secondary/20">
@@ -592,41 +621,41 @@
     </div>
 
     <!-- REVISED MARQUEE MITRA LOGOS (Outlined versions and slowed smooth speed - 75s) -->
-    <div class="max-w-7xl mx-auto mt-20 overflow-hidden relative">
-      <div class="absolute top-0 bottom-0 left-0 w-32 bg-gradient-to-r from-ui-bgSec to-transparent z-10 pointer-events-none"></div>
-      <div class="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-ui-bgSec to-transparent z-10 pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto mt-16 md:mt-20 overflow-hidden relative">
+      <div class="absolute top-0 bottom-0 left-0 w-20 md:w-32 bg-gradient-to-r from-ui-bgSec to-transparent z-10 pointer-events-none"></div>
+      <div class="absolute top-0 bottom-0 right-0 w-20 md:w-32 bg-gradient-to-l from-ui-bgSec to-transparent z-10 pointer-events-none"></div>
       
-      <div class="marquee-track flex gap-12 py-4">
+      <div class="marquee-track flex gap-8 md:gap-12 py-4">
         <!-- Soto & Pawon Ndeso -->
-        <div class="flex items-center gap-3 bg-ui-bg px-7 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
+        <div class="flex items-center gap-3 bg-ui-bg px-6 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
           <svg class="w-6 h-6 text-brand-primary stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2">
             <path d="M12 2v3M9 2v3M15 2v3"/>
             <path d="M4 11h16a1 1 0 0 1 1 1c0 4.4-3.6 8-8 8s-8-3.6-8-8a1 1 0 0 1 1-1Z"/>
             <path d="M6 11V9a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/>
           </svg>
-          <span class="font-bold text-sm tracking-widest uppercase">Soto &amp; Pawon Ndeso</span>
+          <span class="font-bold text-xs md:text-sm tracking-widest uppercase">Soto &amp; Pawon Ndeso</span>
         </div>
         <!-- Kopi Ujung Jalan -->
-        <div class="flex items-center gap-3 bg-ui-bg px-7 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
+        <div class="flex items-center gap-3 bg-ui-bg px-6 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
           <svg class="w-6 h-6 text-brand-secondary fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2">
             <path d="M17 8h1a4 4 0 1 1 0 8h-1"/>
             <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8Z"/>
             <path d="M6 2v2M10 2v2M14 2v2"/>
           </svg>
-          <span class="font-bold text-sm tracking-widest uppercase">Kopi Ujung Jalan</span>
+          <span class="font-bold text-xs md:text-sm tracking-widest uppercase">Kopi Ujung Jalan</span>
         </div>
         <!-- Kebab & Burger 2 Hearts -->
-        <div class="flex items-center gap-3 bg-ui-bg px-7 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
+        <div class="flex items-center gap-3 bg-ui-bg px-6 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
           <svg class="w-6 h-6 text-brand-primary fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M2 12a10 10 0 0 1 20 0H2Z"/>
             <path d="M5 12h14"/>
             <path d="M2 16a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3"/>
             <path d="M6 16c0-1 1-2 2-2h8c1 0 2 1 2 2"/>
           </svg>
-          <span class="font-bold text-sm tracking-widest uppercase">Kebab &amp; Burger 2 Hearts</span>
+          <span class="font-bold text-xs md:text-sm tracking-widest uppercase">Kebab &amp; Burger 2 Hearts</span>
         </div>
         <!-- Mie Fil-Fil -->
-        <div class="flex items-center gap-3 bg-ui-bg px-7 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
+        <div class="flex items-center gap-3 bg-ui-bg px-6 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
           <svg class="w-6 h-6 text-brand-secondary fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M22 2c-3 1-6 2-9 2.5"/>
             <path d="M22 5c-4 1-8 2-12 2"/>
@@ -635,74 +664,74 @@
             <path d="M9 11c1 3 1.5 5 1.5 7"/>
             <path d="M17 11c-1 3-2 6-3 8"/>
           </svg>
-          <span class="font-bold text-sm tracking-widest uppercase">Mie Fil-Fil</span>
+          <span class="font-bold text-xs md:text-sm tracking-widest uppercase">Mie Fil-Fil</span>
         </div>
         <!-- Penyetan Pak Brewok -->
-        <div class="flex items-center gap-3 bg-ui-bg px-7 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
+        <div class="flex items-center gap-3 bg-ui-bg px-6 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
           <svg class="w-6 h-6 text-brand-primary fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M23 12c-3.5-3-9-4-13-1-3 2.2-5 1-7-1 1 4 2.5 6 5 7 4 1.5 8.5.5 11.5-2l3.5-3Z" />
             <path d="M10 16c-1-1-1-3 0-4" />
             <circle cx="18" cy="11" r="1" fill="currentColor" />
           </svg>
-          <span class="font-bold text-sm tracking-widest uppercase">Penyetan Pak Brewok</span>
+          <span class="font-bold text-xs md:text-sm tracking-widest uppercase">Penyetan Pak Brewok</span>
         </div>
         <!-- Dimsum Artiza -->
-        <div class="flex items-center gap-3 bg-ui-bg px-7 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
+        <div class="flex items-center gap-3 bg-ui-bg px-6 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
           <svg class="w-6 h-6 text-brand-secondary fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 12h18v6a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-6Z" />
             <path d="M3 12c0-3 3-4 6-4s4 2 4 4" />
             <path d="M11 12c0-3 3-4 6-4s4 2 4 4" />
             <path d="M3 15h18" />
           </svg>
-          <span class="font-bold text-sm tracking-widest uppercase">Dimsum Artiza</span>
+          <span class="font-bold text-xs md:text-sm tracking-widest uppercase">Dimsum Artiza</span>
         </div>
         <!-- Bubur Tiam -->
-        <div class="flex items-center gap-3 bg-ui-bg px-7 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
+        <div class="flex items-center gap-3 bg-ui-bg px-6 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
           <svg class="w-6 h-6 text-brand-primary fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 12h18a1 1 0 0 1 1 1c0 4.4-3.6 8-8 8s-8-3.6-8-8a1 1 0 0 1 1-1Z" />
             <path d="M12 2v4M8 3v3M16 3v3" />
             <path d="M2 12h20" />
           </svg>
-          <span class="font-bold text-sm tracking-widest uppercase">Bubur Tiam</span>
+          <span class="font-bold text-xs md:text-sm tracking-widest uppercase">Bubur Tiam</span>
         </div>
         <!-- Okazu by Anin Secret -->
-        <div class="flex items-center gap-3 bg-ui-bg px-7 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
+        <div class="flex items-center gap-3 bg-ui-bg px-6 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
           <svg class="w-6 h-6 text-brand-secondary fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 12c0 4.4 3.6 8 8 8h2c4.4 0 8-3.6 8-8H3Z" />
             <path d="M12 20v2M9 22h6" />
             <path d="M6 12c1-2 3-3 6-3s5 1 6 3" />
             <path d="M10 5l4 4" />
           </svg>
-          <span class="font-bold text-sm tracking-widest uppercase">Okazu by Anin Secret</span>
+          <span class="font-bold text-xs md:text-sm tracking-widest uppercase">Okazu by Anin Secret</span>
         </div>
 
         <!-- Repeated loop for seamless marquee sliding -->
-        <div class="flex items-center gap-3 bg-ui-bg px-7 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
+        <div class="flex items-center gap-3 bg-ui-bg px-6 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
           <svg class="w-6 h-6 text-brand-primary stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2">
             <path d="M12 2v3M9 2v3M15 2v3"/>
             <path d="M4 11h16a1 1 0 0 1 1 1c0 4.4-3.6 8-8 8s-8-3.6-8-8a1 1 0 0 1 1-1Z"/>
             <path d="M6 11V9a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/>
           </svg>
-          <span class="font-bold text-sm tracking-widest uppercase">Soto &amp; Pawon Ndeso</span>
+          <span class="font-bold text-xs md:text-sm tracking-widest uppercase">Soto &amp; Pawon Ndeso</span>
         </div>
-        <div class="flex items-center gap-3 bg-ui-bg px-7 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
+        <div class="flex items-center gap-3 bg-ui-bg px-6 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
           <svg class="w-6 h-6 text-brand-secondary fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2">
             <path d="M17 8h1a4 4 0 1 1 0 8h-1"/>
             <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8Z"/>
             <path d="M6 2v2M10 2v2M14 2v2"/>
           </svg>
-          <span class="font-bold text-sm tracking-widest uppercase">Kopi Ujung Jalan</span>
+          <span class="font-bold text-xs md:text-sm tracking-widest uppercase">Kopi Ujung Jalan</span>
         </div>
-        <div class="flex items-center gap-3 bg-ui-bg px-7 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
+        <div class="flex items-center gap-3 bg-ui-bg px-6 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
           <svg class="w-6 h-6 text-brand-primary fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M2 12a10 10 0 0 1 20 0H2Z"/>
             <path d="M5 12h14"/>
             <path d="M2 16a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3"/>
             <path d="M6 16c0-1 1-2 2-2h8c1 0 2 1 2 2"/>
           </svg>
-          <span class="font-bold text-sm tracking-widest uppercase">Kebab &amp; Burger 2 Hearts</span>
+          <span class="font-bold text-xs md:text-sm tracking-widest uppercase">Kebab &amp; Burger 2 Hearts</span>
         </div>
-        <div class="flex items-center gap-3 bg-ui-bg px-7 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
+        <div class="flex items-center gap-3 bg-ui-bg px-6 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
           <svg class="w-6 h-6 text-brand-secondary fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M22 2c-3 1-6 2-9 2.5"/>
             <path d="M22 5c-4 1-8 2-12 2"/>
@@ -711,92 +740,92 @@
             <path d="M9 11c1 3 1.5 5 1.5 7"/>
             <path d="M17 11c-1 3-2 6-3 8"/>
           </svg>
-          <span class="font-bold text-sm tracking-widest uppercase">Mie Fil-Fil</span>
+          <span class="font-bold text-xs md:text-sm tracking-widest uppercase">Mie Fil-Fil</span>
         </div>
-        <div class="flex items-center gap-3 bg-ui-bg px-7 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
+        <div class="flex items-center gap-3 bg-ui-bg px-6 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
           <svg class="w-6 h-6 text-brand-primary fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M23 12c-3.5-3-9-4-13-1-3 2.2-5 1-7-1 1 4 2.5 6 5 7 4 1.5 8.5.5 11.5-2l3.5-3Z" />
             <path d="M10 16c-1-1-1-3 0-4" />
             <circle cx="18" cy="11" r="1" fill="currentColor" />
           </svg>
-          <span class="font-bold text-sm tracking-widest uppercase">Penyetan Pak Brewok</span>
+          <span class="font-bold text-xs md:text-sm tracking-widest uppercase">Penyetan Pak Brewok</span>
         </div>
-        <div class="flex items-center gap-3 bg-ui-bg px-7 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
+        <div class="flex items-center gap-3 bg-ui-bg px-6 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
           <svg class="w-6 h-6 text-brand-secondary fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 12h18v6a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-6Z" />
             <path d="M3 12c0-3 3-4 6-4s4 2 4 4" />
             <path d="M11 12c0-3 3-4 6-4s4 2 4 4" />
             <path d="M3 15h18" />
           </svg>
-          <span class="font-bold text-sm tracking-widest uppercase">Dimsum Artiza</span>
+          <span class="font-bold text-xs md:text-sm tracking-widest uppercase">Dimsum Artiza</span>
         </div>
-        <div class="flex items-center gap-3 bg-ui-bg px-7 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
+        <div class="flex items-center gap-3 bg-ui-bg px-6 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
           <svg class="w-6 h-6 text-brand-primary fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 12h18a1 1 0 0 1 1 1c0 4.4-3.6 8-8 8s-8-3.6-8-8a1 1 0 0 1 1-1Z" />
             <path d="M12 2v4M8 3v3M16 3v3" />
             <path d="M2 12h20" />
           </svg>
-          <span class="font-bold text-sm tracking-widest uppercase">Bubur Tiam</span>
+          <span class="font-bold text-xs md:text-sm tracking-widest uppercase">Bubur Tiam</span>
         </div>
-        <div class="flex items-center gap-3 bg-ui-bg px-7 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
+        <div class="flex items-center gap-3 bg-ui-bg px-6 py-3.5 rounded-xl border border-ui-border text-ui-txt shadow-sm">
           <svg class="w-6 h-6 text-brand-secondary fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 12c0 4.4 3.6 8 8 8h2c4.4 0 8-3.6 8-8H3Z" />
             <path d="M12 20v2M9 22h6" />
             <path d="M6 12c1-2 3-3 6-3s5 1 6 3" />
             <path d="M10 5l4 4" />
           </svg>
-          <span class="font-bold text-sm tracking-widest uppercase">Okazu by Anin Secret</span>
+          <span class="font-bold text-xs md:text-sm tracking-widest uppercase">Okazu by Anin Secret</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Gallery Section -->
-  <section id="gallery" class="py-32 px-8 bg-ui-bgSec border-y border-ui-border relative overflow-hidden">
+  <section id="gallery" class="py-24 md:py-32 px-6 md:px-8 bg-ui-bgSec border-y border-ui-border relative overflow-hidden">
     <div class="max-w-7xl mx-auto mb-16 text-center">
       <span class="text-brand-secondary font-bold uppercase tracking-widest text-sm">GALERI AKTIVITAS</span>
-      <h2 class="text-4xl md:text-5xl font-extrabold mt-3 text-ui-txt tracking-tight">Dokumentasi Kawasan GSC</h2>
-      <p class="text-ui-txtSec text-sm mt-3 font-semibold">Klik pada foto untuk melihat ukuran penuh</p>
+      <h2 class="text-3xl md:text-5xl font-extrabold mt-3 text-ui-txt tracking-tight">Dokumentasi Kawasan GSC</h2>
+      <p class="text-ui-txtSec text-xs md:text-sm mt-3 font-semibold">Klik pada foto untuk melihat ukuran penuh</p>
     </div>
 
     <!-- Infinite Auto Sliding Gallery Wrapper with improved seamless gradients -->
     <div class="relative w-full overflow-hidden">
       <!-- Upgraded fade mask overlays to prevent hard borders completely -->
-      <div class="absolute top-0 bottom-0 left-0 w-36 md:w-56 gallery-mask-l z-20 pointer-events-none"></div>
-      <div class="absolute top-0 bottom-0 right-0 w-36 md:w-56 gallery-mask-r z-20 pointer-events-none"></div>
+      <div class="absolute top-0 bottom-0 left-0 w-24 md:w-56 gallery-mask-l z-20 pointer-events-none"></div>
+      <div class="absolute top-0 bottom-0 right-0 w-24 md:w-56 gallery-mask-r z-20 pointer-events-none"></div>
       
-      <div class="gallery-track flex gap-8">
+      <div class="gallery-track flex gap-6 md:gap-8">
         <!-- Slide 1 -->
-        <img onclick="openLightbox(this.src)" class="rounded-2xl w-80 h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/12314077/pexels-photo-12314077.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Latihan Gym">
+        <img onclick="openLightbox(this.src)" class="rounded-2xl w-64 h-48 md:w-80 md:h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/12314077/pexels-photo-12314077.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Latihan Gym">
         <!-- Slide 2 -->
-        <img onclick="openLightbox(this.src)" class="rounded-2xl w-80 h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/19875328/pexels-photo-19875328.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Playground Anak">
+        <img onclick="openLightbox(this.src)" class="rounded-2xl w-64 h-48 md:w-80 md:h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/19875328/pexels-photo-19875328.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Playground Anak">
         <!-- Slide 3 -->
-        <img onclick="openLightbox(this.src)" class="rounded-2xl w-80 h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/37307945/pexels-photo-37307945.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Lapangan Basket">
+        <img onclick="openLightbox(this.src)" class="rounded-2xl w-64 h-48 md:w-80 md:h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/37307945/pexels-photo-37307945.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Lapangan Basket">
         <!-- Slide 4 -->
-        <img onclick="openLightbox(this.src)" class="rounded-2xl w-80 h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/37097046/pexels-photo-37097046.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Futsal GSC">
+        <img onclick="openLightbox(this.src)" class="rounded-2xl w-64 h-48 md:w-80 md:h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/37097046/pexels-photo-37097046.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Futsal GSC">
         <!-- Slide 5 -->
-        <img onclick="openLightbox(this.src)" class="rounded-2xl w-80 h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/25078446/pexels-photo-25078446.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Kuliner Lokal">
+        <img onclick="openLightbox(this.src)" class="rounded-2xl w-64 h-48 md:w-80 md:h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/25078446/pexels-photo-25078446.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Kuliner Lokal">
         <!-- Slide 6 -->
-        <img onclick="openLightbox(this.src)" class="rounded-2xl w-80 h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/6300857/pexels-photo-6300857.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Keluarga Bersantai">
+        <img onclick="openLightbox(this.src)" class="rounded-2xl w-64 h-48 md:w-80 md:h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/6300857/pexels-photo-6300857.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Keluarga Bersantai">
         
         <!-- Duplicated items for infinite marquee slide continuity -->
-        <img onclick="openLightbox(this.src)" class="rounded-2xl w-80 h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/12314077/pexels-photo-12314077.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Latihan Gym">
-        <img onclick="openLightbox(this.src)" class="rounded-2xl w-80 h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/19875328/pexels-photo-19875328.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Playground Anak">
-        <img onclick="openLightbox(this.src)" class="rounded-2xl w-80 h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/37307945/pexels-photo-37307945.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Lapangan Basket">
-        <img onclick="openLightbox(this.src)" class="rounded-2xl w-80 h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/37097046/pexels-photo-37097046.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Futsal GSC">
-        <img onclick="openLightbox(this.src)" class="rounded-2xl w-80 h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/25078446/pexels-photo-25078446.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Kuliner Lokal">
-        <img onclick="openLightbox(this.src)" class="rounded-2xl w-80 h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/6300857/pexels-photo-6300857.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Keluarga Bersantai">
+        <img onclick="openLightbox(this.src)" class="rounded-2xl w-64 h-48 md:w-80 md:h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/12314077/pexels-photo-12314077.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Latihan Gym">
+        <img onclick="openLightbox(this.src)" class="rounded-2xl w-64 h-48 md:w-80 md:h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/19875328/pexels-photo-19875328.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Playground Anak">
+        <img onclick="openLightbox(this.src)" class="rounded-2xl w-64 h-48 md:w-80 md:h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/37307945/pexels-photo-37307945.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Lapangan Basket">
+        <img onclick="openLightbox(this.src)" class="rounded-2xl w-64 h-48 md:w-80 md:h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/37097046/pexels-photo-37097046.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Futsal GSC">
+        <img onclick="openLightbox(this.src)" class="rounded-2xl w-64 h-48 md:w-80 md:h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/25078446/pexels-photo-25078446.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Kuliner Lokal">
+        <img onclick="openLightbox(this.src)" class="rounded-2xl w-64 h-48 md:w-80 md:h-56 object-cover cursor-pointer hover:scale-105 transition-transform duration-300 shadow-md flex-shrink-0" loading="lazy" src="https://images.pexels.com/photos/6300857/pexels-photo-6300857.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Keluarga Bersantai">
       </div>
     </div>
   </section>
 
   <!-- Testimonials Slider Section -->
-  <section id="testimonials" class="py-32 px-8 relative bg-ui-bg overflow-hidden">
+  <section id="testimonials" class="py-24 md:py-32 px-6 md:px-8 relative bg-ui-bg overflow-hidden">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
         <span class="text-brand-primary font-bold uppercase tracking-widest text-sm">TESTIMONI PENGUNJUNG</span>
-        <h2 class="text-4xl md:text-5xl font-extrabold mt-3 tracking-tight">Apa Kata Mereka</h2>
-        <p class="text-ui-txtSec mt-4 max-w-xl mx-auto text-base font-medium">Pengalaman nyata dari pengunjung setia yang tumbuh berkembang bersama Gazebo Sport Center.</p>
+        <h2 class="text-3xl md:text-5xl font-extrabold mt-3 tracking-tight">Apa Kata Mereka</h2>
+        <p class="text-ui-txtSec mt-4 max-w-xl mx-auto text-sm md:text-base font-medium">Pengalaman nyata dari pengunjung setia yang tumbuh berkembang bersama Gazebo Sport Center.</p>
       </div>
 
       <!-- Testimonials Carousel Container (Infinite Seamless Loop Widths) -->
@@ -807,7 +836,7 @@
 
         <div id="testimonial-track" class="flex transition-transform duration-500 ease-out gap-6 py-4">
           <!-- Slide 1 -->
-          <div class="glass p-8 rounded-3xl min-w-[340px] md:min-w-[420px] max-w-[420px] flex-shrink-0 relative hover:border-brand-primary/30 transition duration-300">
+          <div class="glass p-6 md:p-8 rounded-3xl min-w-[280px] md:min-w-[420px] max-w-[420px] flex-shrink-0 relative hover:border-brand-primary/30 transition duration-300">
             <div class="flex items-center gap-1 text-amber-400 mb-4">
               <i data-lucide="star" class="w-4 h-4 fill-current"></i>
               <i data-lucide="star" class="w-4 h-4 fill-current"></i>
@@ -815,18 +844,18 @@
               <i data-lucide="star" class="w-4 h-4 fill-current"></i>
               <i data-lucide="star" class="w-4 h-4 fill-current"></i>
             </div>
-            <p class="text-ui-txt text-sm italic leading-relaxed font-medium">"Sangat bersyukur ada kawasan GSC di Bantul. Lapangan basketnya rapi dan spot kulinernya juara setelah latihan beban. Parkiran luas dan suasananya sejuk sekali."</p>
+            <p class="text-ui-txt text-xs md:text-sm italic leading-relaxed font-medium">"Sangat bersyukur ada kawasan GSC di Bantul. Lapangan basketnya rapi dan spot kulinernya juara setelah latihan beban. Parkiran luas dan suasananya sejuk sekali."</p>
             <div class="flex items-center gap-4 mt-6 pt-6 border-t border-ui-border">
               <div class="w-10 h-10 rounded-full bg-brand-primary/20 flex items-center justify-center font-bold text-brand-primary text-sm">B</div>
               <div>
-                <h4 class="font-bold text-ui-txt text-sm">Bagus Wicaksono</h4>
+                <h4 class="font-bold text-ui-txt text-xs md:text-sm">Bagus Wicaksono</h4>
                 <p class="text-xs text-ui-txtSec font-medium">Member Basket &amp; Gym</p>
               </div>
             </div>
           </div>
 
           <!-- Slide 2 -->
-          <div class="glass p-8 rounded-3xl min-w-[340px] md:min-w-[420px] max-w-[420px] flex-shrink-0 relative hover:border-brand-secondary/30 transition duration-300">
+          <div class="glass p-6 md:p-8 rounded-3xl min-w-[280px] md:min-w-[420px] max-w-[420px] flex-shrink-0 relative hover:border-brand-secondary/30 transition duration-300">
             <div class="flex items-center gap-1 text-amber-400 mb-4">
               <i data-lucide="star" class="w-4 h-4 fill-current"></i>
               <i data-lucide="star" class="w-4 h-4 fill-current"></i>
@@ -834,18 +863,18 @@
               <i data-lucide="star" class="w-4 h-4 fill-current"></i>
               <i data-lucide="star" class="w-4 h-4 fill-current"></i>
             </div>
-            <p class="text-ui-txt text-sm italic leading-relaxed font-medium">"Tempat andalan berakhir pekan bersama anak-anak. Sembari si kecil main aman di kids playground, saya dan istri bisa santai menikmati kopi di Kopi Ujung Jalan."</p>
+            <p class="text-ui-txt text-xs md:text-sm italic leading-relaxed font-medium">"Tempat andalan berakhir pekan bersama anak-anak. Sembari si kecil main aman di kids playground, saya dan istri bisa santai menikmati kopi di Kopi Ujung Jalan."</p>
             <div class="flex items-center gap-4 mt-6 pt-6 border-t border-ui-border">
               <div class="w-10 h-10 rounded-full bg-brand-secondary/20 flex items-center justify-center font-bold text-brand-secondary text-sm">R</div>
               <div>
-                <h4 class="font-bold text-ui-txt text-sm">Rian &amp; Arini</h4>
+                <h4 class="font-bold text-ui-txt text-xs md:text-sm">Rian &amp; Arini</h4>
                 <p class="text-xs text-ui-txtSec font-medium">Keluarga Pengunjung</p>
               </div>
             </div>
           </div>
 
           <!-- Slide 3 -->
-          <div class="glass p-8 rounded-3xl min-w-[340px] md:min-w-[420px] max-w-[420px] flex-shrink-0 relative hover:border-brand-primary/30 transition duration-300">
+          <div class="glass p-6 md:p-8 rounded-3xl min-w-[280px] md:min-w-[420px] max-w-[420px] flex-shrink-0 relative hover:border-brand-primary/30 transition duration-300">
             <div class="flex items-center gap-1 text-amber-400 mb-4">
               <i data-lucide="star" class="w-4 h-4 fill-current"></i>
               <i data-lucide="star" class="w-4 h-4 fill-current"></i>
@@ -853,18 +882,18 @@
               <i data-lucide="star" class="w-4 h-4 fill-current"></i>
               <i data-lucide="star" class="w-4 h-4 fill-current"></i>
             </div>
-            <p class="text-ui-txt text-sm italic leading-relaxed font-medium">"Ruang belajarnya sangat ramah dan tenang. Sangat cocok buat meeting santai maupun sekadar WFH. Plus harganya sangat merakyat untuk fasilitas sekeren ini!"</p>
+            <p class="text-ui-txt text-xs md:text-sm italic leading-relaxed font-medium">"Ruang belajarnya sangat ramah dan tenang. Sangat cocok buat meeting santai maupun sekadar WFH. Plus harganya sangat merakyat untuk fasilitas sekeren ini!"</p>
             <div class="flex items-center gap-4 mt-6 pt-6 border-t border-ui-border">
               <div class="w-10 h-10 rounded-full bg-brand-primary/20 flex items-center justify-center font-bold text-brand-primary text-sm">D</div>
               <div>
-                <h4 class="font-bold text-ui-txt text-sm">Dina Mariana</h4>
+                <h4 class="font-bold text-ui-txt text-xs md:text-sm">Dina Mariana</h4>
                 <p class="text-xs text-ui-txtSec font-medium">Mahasiswi / Freelancer</p>
               </div>
             </div>
           </div>
 
           <!-- Slide 4 -->
-          <div class="glass p-8 rounded-3xl min-w-[340px] md:min-w-[420px] max-w-[420px] flex-shrink-0 relative hover:border-brand-secondary/30 transition duration-300">
+          <div class="glass p-6 md:p-8 rounded-3xl min-w-[280px] md:min-w-[420px] max-w-[420px] flex-shrink-0 relative hover:border-brand-secondary/30 transition duration-300">
             <div class="flex items-center gap-1 text-amber-400 mb-4">
               <i data-lucide="star" class="w-4 h-4 fill-current"></i>
               <i data-lucide="star" class="w-4 h-4 fill-current"></i>
@@ -872,18 +901,18 @@
               <i data-lucide="star" class="w-4 h-4 fill-current"></i>
               <i data-lucide="star" class="w-4 h-4 fill-current"></i>
             </div>
-            <p class="text-ui-txt text-sm italic leading-relaxed font-medium">"Sangat kagum dengan fasilitas Mini Soccer Kids-nya. Rumput sintetisnya empuk banget dan aman buat lutut anak saya saat berlatih sepakbola."</p>
+            <p class="text-ui-txt text-xs md:text-sm italic leading-relaxed font-medium">"Sangat kagum dengan fasilitas Mini Soccer Kids-nya. Rumput sintetisnya empuk banget dan aman buat lutut anak saya saat berlatih sepakbola."</p>
             <div class="flex items-center gap-4 mt-6 pt-6 border-t border-ui-border">
               <div class="w-10 h-10 rounded-full bg-brand-secondary/20 flex items-center justify-center font-bold text-brand-secondary text-sm">A</div>
               <div>
-                <h4 class="font-bold text-ui-txt text-sm">Aris Hendra</h4>
+                <h4 class="font-bold text-ui-txt text-xs md:text-sm">Aris Hendra</h4>
                 <p class="text-xs text-ui-txtSec font-medium">Orang Tua Atlet Cilik</p>
               </div>
             </div>
           </div>
 
           <!-- Slide 5 -->
-          <div class="glass p-8 rounded-3xl min-w-[340px] md:min-w-[420px] max-w-[420px] flex-shrink-0 relative hover:border-brand-primary/30 transition duration-300">
+          <div class="glass p-6 md:p-8 rounded-3xl min-w-[280px] md:min-w-[420px] max-w-[420px] flex-shrink-0 relative hover:border-brand-primary/30 transition duration-300">
             <div class="flex items-center gap-1 text-amber-400 mb-4">
               <i data-lucide="star" class="w-4 h-4 fill-current"></i>
               <i data-lucide="star" class="w-4 h-4 fill-current"></i>
@@ -891,11 +920,11 @@
               <i data-lucide="star" class="w-4 h-4 fill-current"></i>
               <i data-lucide="star" class="w-4 h-4 fill-current"></i>
             </div>
-            <p class="text-ui-txt text-sm italic leading-relaxed font-medium">"Kantin kulinernya benar-benar memanjakan lidah setelah berolahraga pagi. Menu Soto Ndeso nendang banget dan harganya bersahabat!"</p>
+            <p class="text-ui-txt text-xs md:text-sm italic leading-relaxed font-medium">"Kantin kulinernya benar-benar memanjakan lidah setelah berolahraga pagi. Menu Soto Ndeso nendang banget dan harganya bersahabat!"</p>
             <div class="flex items-center gap-4 mt-6 pt-6 border-t border-ui-border">
               <div class="w-10 h-10 rounded-full bg-brand-primary/20 flex items-center justify-center font-bold text-brand-primary text-sm">H</div>
               <div>
-                <h4 class="font-bold text-ui-txt text-sm">Hendra S.</h4>
+                <h4 class="font-bold text-ui-txt text-xs md:text-sm">Hendra S.</h4>
                 <p class="text-xs text-ui-txtSec font-medium">Pengunjung Setia</p>
               </div>
             </div>
@@ -917,17 +946,17 @@
   </section>
 
   <!-- Interactive Reservation Simulator -->
-  <section id="reservation-simulator" class="py-32 px-8">
-    <div class="max-w-4xl mx-auto glass rounded-3xl p-10 md:p-14 border border-ui-border relative overflow-hidden shadow-2xl">
+  <section id="reservation-simulator" class="py-24 md:py-32 px-6 md:px-8">
+    <div class="max-w-4xl mx-auto glass rounded-3xl p-6 sm:p-10 md:p-14 border border-ui-border relative overflow-hidden shadow-2xl">
       <div class="absolute -top-10 -right-10 w-40 h-40 bg-brand-primary/10 rounded-full blur-2xl"></div>
       <div class="text-center mb-10">
         <span class="text-brand-primary font-bold uppercase tracking-widest text-xs">ONLINE RESERVASI SIMULATOR</span>
-        <h2 class="text-3xl font-extrabold mt-2 text-ui-txt tracking-tight">Hitung &amp; Reservasi Fasilitas</h2>
-        <p class="text-ui-txtSec text-sm mt-2 font-medium">Pilih fasilitas, lama reservasi, dan hitung estimasi total biaya Anda secara instan.</p>
+        <h2 class="text-2xl md:text-3xl font-extrabold mt-2 text-ui-txt tracking-tight">Hitung &amp; Reservasi Fasilitas</h2>
+        <p class="text-ui-txtSec text-xs md:text-sm mt-2 font-medium">Pilih fasilitas, lama reservasi, dan hitung estimasi total biaya Anda secara instan.</p>
       </div>
 
       <form id="calc-form" class="space-y-8">
-        <div class="grid md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           <div>
             <label class="block text-sm font-bold text-ui-txt mb-2.5">Pilih Fasilitas</label>
             <div class="relative">
@@ -948,12 +977,12 @@
           </div>
         </div>
 
-        <div class="bg-brand-primary/5 border border-brand-primary/10 rounded-2xl p-8 flex items-center justify-between gap-6 shadow-sm">
-          <div>
+        <div class="bg-brand-primary/5 border border-brand-primary/10 rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
+          <div class="text-center sm:text-left w-full sm:w-auto">
             <p class="text-xs text-ui-txtSec uppercase tracking-wider font-bold">Estimasi Total Biaya</p>
-            <h3 class="text-4xl font-black text-brand-primary mt-1" id="calc-total-display">Rp 20.000</h3>
+            <h3 class="text-3xl md:text-4xl font-black text-brand-primary mt-1" id="calc-total-display">Rp 20.000</h3>
           </div>
-          <button type="button" onclick="sendWhatsAppBooking()" class="bg-brand-primary hover:bg-emerald-400 text-black font-bold px-9 py-4 rounded-full transition-all duration-300 hover:-translate-y-0.5 flex items-center gap-2.5 shadow-lg shadow-brand-primary/25">
+          <button type="button" onclick="sendWhatsAppBooking()" class="w-full sm:w-auto bg-brand-primary hover:bg-emerald-400 text-black font-bold px-8 py-4 rounded-full transition-all duration-300 hover:-translate-y-0.5 flex items-center justify-center gap-2.5 shadow-lg shadow-brand-primary/25">
             <i data-lucide="phone" class="w-5 h-5"></i> Hubungi WA Untuk Booking
           </button>
         </div>
@@ -962,17 +991,17 @@
   </section>
 
   <!-- CTA Section -->
-  <section class="py-32 px-8 relative overflow-hidden">
+  <section class="py-24 md:py-32 px-6 md:px-8 relative overflow-hidden">
     <div class="absolute inset-0 bg-brand-primary/5 blur-3xl pointer-events-none"></div>
     <div class="max-w-4xl mx-auto text-center fade-in relative z-10">
-      <h2 class="text-4xl md:text-5xl font-black leading-tight text-ui-txt tracking-tight">Wujudkan Gaya Hidup Sehat &amp; Berkualitas Bersama Keluarga</h2>
-      <p class="text-ui-txtSec mt-6 max-w-2xl mx-auto text-base md:text-lg font-medium">Kunjungi kami hari ini atau amankan tiket reservasi lapangan secara praktis online melalui kontak resmi kami.</p>
-      <div class="flex justify-center gap-5 mt-12">
+      <h2 class="text-3xl md:text-5xl font-black leading-tight text-ui-txt tracking-tight">Wujudkan Gaya Hidup Sehat &amp; Berkualitas Bersama Keluarga</h2>
+      <p class="text-ui-txtSec mt-6 max-w-2xl mx-auto text-sm md:text-lg font-medium">Kunjungi kami hari ini atau amankan tiket reservasi lapangan secara praktis online melalui kontak resmi kami.</p>
+      <div class="flex flex-wrap justify-center gap-4 md:gap-5 mt-10 md:mt-12">
         <!-- Opens GSC Collaboration Modal -->
-        <button onclick="openCollabModal()" class="px-9 py-4 rounded-full font-bold bg-brand-primary hover:bg-emerald-400 text-black transition-all duration-300 hover:-translate-y-0.5 shadow-lg shadow-brand-primary/20">
+        <button onclick="openCollabModal()" class="w-full sm:w-auto px-9 py-4 rounded-full font-bold bg-brand-primary hover:bg-emerald-400 text-black transition-all duration-300 hover:-translate-y-0.5 shadow-lg shadow-brand-primary/20 text-center">
           Ayo Kolaborasi
         </button> 
-        <button onclick="openBookingModal()" class="px-9 py-4 rounded-full font-bold border border-ui-border text-ui-txt hover:border-brand-primary hover:bg-brand-primary/5 transition duration-300">
+        <button onclick="openBookingModal()" class="w-full sm:w-auto px-9 py-4 rounded-full font-bold border border-ui-border text-ui-txt hover:border-brand-primary hover:bg-brand-primary/5 transition duration-300 text-center">
           Reservasi Sekarang
         </button>
       </div>
@@ -980,8 +1009,8 @@
   </section>
 
   <!-- Footer -->
-  <footer class="border-t border-ui-border bg-ui-bgSec py-20 px-8">
-    <div class="max-w-7xl mx-auto grid grid-cols-3 gap-16">
+  <footer class="border-t border-ui-border bg-ui-bgSec py-16 md:py-20 px-6 md:px-8">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
       <div>
         <div class="flex items-center gap-3.5 mb-6">
           <span class="w-3 h-7 bg-brand-primary rounded-full"></span>
@@ -1018,7 +1047,7 @@
         </ul>
       </div>
     </div>
-    <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-ui-border flex justify-between items-center text-sm font-semibold text-ui-txtSec">
+    <div class="max-w-7xl mx-auto mt-12 md:mt-16 pt-8 border-t border-ui-border flex flex-col md:flex-row gap-4 justify-between items-center text-xs md:text-sm font-semibold text-ui-txtSec text-center">
       <p>© 2026 GSC — Gazebo Sport Center. Hak cipta dilindungi undang-undang.</p>
       <p>Didesain untuk kebersamaan komunitas olahraga &amp; keluarga.</p>
     </div>
@@ -1033,39 +1062,39 @@
   </div>
 
   <!-- BOOKING MODAL -->
-  <div id="booking-modal" class="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-8">
-    <div class="bg-ui-bgSec border border-ui-border rounded-3xl w-full max-w-lg p-10 transform scale-95 transition-transform duration-300 shadow-2xl relative">
-      <button onclick="closeBookingModal()" class="absolute top-8 right-8 text-ui-txtSec hover:text-ui-txt transition">
+  <div id="booking-modal" class="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4 sm:p-8">
+    <div class="bg-ui-bgSec border border-ui-border rounded-3xl w-full max-w-lg p-6 sm:p-10 transform scale-95 transition-transform duration-300 shadow-2xl relative">
+      <button onclick="closeBookingModal()" class="absolute top-6 right-6 sm:top-8 sm:right-8 text-ui-txtSec hover:text-ui-txt transition">
         <i data-lucide="x" class="w-6 h-6"></i>
       </button>
-      <h3 class="text-3xl font-extrabold mb-2 text-ui-txt tracking-tight">Reservasi GSC</h3>
-      <p class="text-ui-txtSec text-sm mb-8 font-medium">Silakan isi data untuk melanjutkan proses pemesanan atau kunjungan Anda.</p>
+      <h3 class="text-2xl sm:text-3xl font-extrabold mb-2 text-ui-txt tracking-tight">Reservasi GSC</h3>
+      <p class="text-ui-txtSec text-sm mb-6 sm:text-base font-medium">Silakan isi data untuk melanjutkan proses pemesanan atau kunjungan Anda.</p>
       
-      <form id="booking-form" onsubmit="handleFormSubmit(event)" class="space-y-5">
+      <form id="booking-form" onsubmit="handleFormSubmit(event)" class="space-y-4 sm:space-y-5">
         <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-ui-txtSec mb-2.5">Nama Lengkap</label>
-          <input type="text" required class="w-full bg-ui-bg border border-ui-border rounded-xl px-5 py-3.5 text-ui-txt focus:border-brand-primary focus:outline-none font-medium">
+          <label class="block text-xs font-bold uppercase tracking-wider text-ui-txtSec mb-2">Nama Lengkap</label>
+          <input type="text" required class="w-full bg-ui-bg border border-ui-border rounded-xl px-5 py-3 text-ui-txt focus:border-brand-primary focus:outline-none font-medium">
         </div>
         <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-ui-txtSec mb-2.5">Pilihan Layanan</label>
-          <select id="modal-select-service" class="w-full bg-ui-bg border border-ui-border rounded-xl px-5 py-3.5 text-ui-txt focus:border-brand-primary focus:outline-none font-medium cursor-pointer">
+          <label class="block text-xs font-bold uppercase tracking-wider text-ui-txtSec mb-2">Pilihan Layanan</label>
+          <select id="modal-select-service" class="w-full bg-ui-bg border border-ui-border rounded-xl px-5 py-3 text-ui-txt focus:border-brand-primary focus:outline-none font-medium cursor-pointer">
             <option value="Basketball Court 3x3">Basketball Court 3x3</option>
             <option value="Mini Soccer Kids">Mini Soccer Kids</option>
             <option value="Gym Membership">Gym Membership</option>
             <option value="Ruang Meeting">Ruang Meeting</option>
           </select>
         </div>
-        <div class="grid grid-cols-2 gap-5">
+        <div class="grid grid-cols-2 gap-4 sm:gap-5">
           <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-ui-txtSec mb-2.5">Tanggal</label>
-            <input type="date" required class="w-full bg-ui-bg border border-ui-border rounded-xl px-5 py-3.5 text-ui-txt focus:border-brand-primary focus:outline-none font-medium">
+            <label class="block text-xs font-bold uppercase tracking-wider text-ui-txtSec mb-2">Tanggal</label>
+            <input type="date" required class="w-full bg-ui-bg border border-ui-border rounded-xl px-5 py-3 text-ui-txt focus:border-brand-primary focus:outline-none font-medium">
           </div>
           <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-ui-txtSec mb-2.5">Waktu Mulai</label>
-            <input type="time" required class="w-full bg-ui-bg border border-ui-border rounded-xl px-5 py-3.5 text-ui-txt focus:border-brand-primary focus:outline-none font-medium">
+            <label class="block text-xs font-bold uppercase tracking-wider text-ui-txtSec mb-2">Waktu Mulai</label>
+            <input type="time" required class="w-full bg-ui-bg border border-ui-border rounded-xl px-5 py-3 text-ui-txt focus:border-brand-primary focus:outline-none font-medium">
           </div>
         </div>
-        <button type="submit" class="w-full bg-brand-primary hover:bg-emerald-400 text-black font-bold py-4 rounded-xl transition duration-300 mt-8 shadow-lg shadow-brand-primary/10">
+        <button type="submit" class="w-full bg-brand-primary hover:bg-emerald-400 text-black font-bold py-3.5 sm:py-4 rounded-xl transition duration-300 mt-6 shadow-lg shadow-brand-primary/10">
           Kirim via WhatsApp
         </button>
       </form>
@@ -1073,22 +1102,22 @@
   </div>
 
   <!-- COLLABORATION MODAL -->
-  <div id="collab-modal" class="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-8">
-    <div class="bg-ui-bgSec border border-ui-border rounded-3xl w-full max-w-lg p-10 transform scale-95 transition-transform duration-300 shadow-2xl relative">
-      <button onclick="closeCollabModal()" class="absolute top-8 right-8 text-ui-txtSec hover:text-ui-txt transition">
+  <div id="collab-modal" class="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4 sm:p-8">
+    <div class="bg-ui-bgSec border border-ui-border rounded-3xl w-full max-w-lg p-6 sm:p-10 transform scale-95 transition-transform duration-300 shadow-2xl relative">
+      <button onclick="closeCollabModal()" class="absolute top-6 right-6 sm:top-8 sm:right-8 text-ui-txtSec hover:text-ui-txt transition">
         <i data-lucide="x" class="w-6 h-6"></i>
       </button>
-      <h3 class="text-3xl font-extrabold mb-2 text-ui-txt tracking-tight">KOLABORASI GSC</h3>
-      <p class="text-ui-txtSec text-sm mb-8 font-medium">Silakan isi data untuk melanjutkan proses kolaborasi atau kunjungan Anda.</p>
+      <h3 class="text-2xl sm:text-3xl font-extrabold mb-2 text-ui-txt tracking-tight">KOLABORASI GSC</h3>
+      <p class="text-ui-txtSec text-xs sm:text-sm mb-6 sm:text-base font-medium">Silakan isi data untuk melanjutkan proses kolaborasi atau kunjungan Anda.</p>
       
-      <form id="collab-form" onsubmit="handleCollabSubmit(event)" class="space-y-5">
+      <form id="collab-form" onsubmit="handleCollabSubmit(event)" class="space-y-4 sm:space-y-5">
         <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-ui-txtSec mb-2.5">Nama Lengkap</label>
-          <input type="text" required class="w-full bg-ui-bg border border-ui-border rounded-xl px-5 py-3.5 text-ui-txt focus:border-brand-primary focus:outline-none font-medium">
+          <label class="block text-xs font-bold uppercase tracking-wider text-ui-txtSec mb-2">Nama Lengkap</label>
+          <input type="text" required class="w-full bg-ui-bg border border-ui-border rounded-xl px-5 py-3 text-ui-txt focus:border-brand-primary focus:outline-none font-medium">
         </div>
         <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-ui-txtSec mb-2.5">Pilih Kerja Sama</label>
-          <select id="modal-select-collab" class="w-full bg-ui-bg border border-ui-border rounded-xl px-5 py-3.5 text-ui-txt focus:border-brand-primary focus:outline-none font-medium cursor-pointer">
+          <label class="block text-xs font-bold uppercase tracking-wider text-ui-txtSec mb-2">Pilih Kerja Sama</label>
+          <select id="modal-select-collab" class="w-full bg-ui-bg border border-ui-border rounded-xl px-5 py-3 text-ui-txt focus:border-brand-primary focus:outline-none font-medium cursor-pointer">
             <option value="Soto dan Pawon Ndeso">Soto dan Pawon Ndeso</option>
             <option value="Tenant UMKM">Tenant UMKM</option>
             <option value="Ruang Belajar &amp; Membaca">Ruang Belajar &amp; Membaca</option>
@@ -1098,17 +1127,17 @@
             <option value="Basketball 3X3">Basketball 3X3</option>
           </select>
         </div>
-        <div class="grid grid-cols-2 gap-5">
+        <div class="grid grid-cols-2 gap-4 sm:gap-5">
           <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-ui-txtSec mb-2.5">Tanggal</label>
-            <input type="date" required class="w-full bg-ui-bg border border-ui-border rounded-xl px-5 py-3.5 text-ui-txt focus:border-brand-primary focus:outline-none font-medium">
+            <label class="block text-xs font-bold uppercase tracking-wider text-ui-txtSec mb-2">Tanggal</label>
+            <input type="date" required class="w-full bg-ui-bg border border-ui-border rounded-xl px-5 py-3 text-ui-txt focus:border-brand-primary focus:outline-none font-medium">
           </div>
           <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-ui-txtSec mb-2.5">Waktu Mulai</label>
-            <input type="time" required class="w-full bg-ui-bg border border-ui-border rounded-xl px-5 py-3.5 text-ui-txt focus:border-brand-primary focus:outline-none font-medium">
+            <label class="block text-xs font-bold uppercase tracking-wider text-ui-txtSec mb-2">Waktu Mulai</label>
+            <input type="time" required class="w-full bg-ui-bg border border-ui-border rounded-xl px-5 py-3 text-ui-txt focus:border-brand-primary focus:outline-none font-medium">
           </div>
         </div>
-        <button type="submit" class="w-full bg-brand-primary hover:bg-emerald-400 text-black font-bold py-4 rounded-xl transition duration-300 mt-8 shadow-lg shadow-brand-primary/10">
+        <button type="submit" class="w-full bg-brand-primary hover:bg-emerald-400 text-black font-bold py-3.5 sm:py-4 rounded-xl transition duration-300 mt-6 shadow-lg shadow-brand-primary/10">
           Kirim Pengajuan Kolaborasi
         </button>
       </form>
@@ -1118,6 +1147,26 @@
   <script>
     // Initialize Lucide Icons
     lucide.createIcons();
+
+    // Mobile Navigation Drawer Toggle Logic
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
+    const mobileNavDrawer = document.getElementById('mobile-nav-drawer');
+
+    mobileMenuToggle.addEventListener('click', () => {
+      mobileNavDrawer.classList.remove('translate-x-full');
+    });
+
+    mobileMenuClose.addEventListener('click', () => {
+      mobileNavDrawer.classList.add('translate-x-full');
+    });
+
+    // Close mobile drawer when clicking layout navigation links
+    document.querySelectorAll('#mobile-nav-drawer a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNavDrawer.classList.add('translate-x-full');
+      });
+    });
 
     // Theme Toggle Handler
     const themeToggleBtn = document.getElementById('theme-toggle-btn');
